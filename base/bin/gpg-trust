@@ -4,12 +4,17 @@ if [ ! -z "$DEBUG" ]; then
     set -x
 fi
 
-for GPG_KEY in ${GPG_KEYS// / }; do
-    for GPG_KEYSERVER in ${GPG_KEYSERVERS// / }; do
-        gpg --keyserver $GPG_KEYSERVER --keyserver-options ${GPG_OPTS:-timeout=10} --recv-keys $GPG_KEY \
-        && echo "trusted-key $GPG_KEY" >> /root/.gnupg/gpg.conf \
-        && break 2
+${GPG_SIGS:-$GPG_SIG}
+${GPG_KEYSERVERS:-$GPG_KEYSERVER}
 
-        echo "Error: Failed to download GPG key $GPG_KEY from key server $GPG_KEYSERVER"
+for GPG_SIG in ${GPG_SIGS//+( )/ }; do
+    for GPG_KEYSERVER in ${GPG_KEYSERVERS//+( )/ }; do
+        echo "Downloading and trusting GPG key for signature $GPG_SIG from key server $GPG_KEYSERVER"
+
+        gpg --keyserver $GPG_KEYSERVER --keyserver-options ${GPG_OPTS:-timeout=10} --recv-keys $GPG_KEY \
+            && echo "trusted-key $GPG_SIG" >> /root/.gnupg/gpg.conf \
+            && break 2
+
+        echo "Error: Failed to download GPG key for signature $GPG_SIG from key server $GPG_KEYSERVER"
     done
 done

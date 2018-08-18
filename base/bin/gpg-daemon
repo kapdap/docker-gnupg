@@ -4,4 +4,4 @@ if [ ! -z "$DEBUG" ]; then
     set -x
 fi
 
-gpg-daemon $@
+gpg-agent ${@:---daemon}
