@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ ! -z "$DEBUG" ]; then
+    set -x
+fi
+
+gpg-agent ${@:---daemon}
+
+gpg-trust

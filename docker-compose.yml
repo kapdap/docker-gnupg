@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  gnupg:
+    image: kapdap/gnupg:latest
+    build: .
+    environment:
+      DEBUG: 'true'
