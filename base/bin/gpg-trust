@@ -4,8 +4,8 @@ if [ ! -z "$DEBUG" ]; then
     set -x
 fi
 
-${GPG_SIGS:-$GPG_SIG}
-${GPG_KEYSERVERS:-$GPG_KEYSERVER}
+GPG_SIGS=${GPG_SIGS:-$GPG_SIG}
+GPG_KEYSERVERS=${GPG_KEYSERVERS:-$GPG_KEYSERVER}
 
 for GPG_SIG in ${GPG_SIGS//+( )/ }; do
     for GPG_KEYSERVER in ${GPG_KEYSERVERS//+( )/ }; do
