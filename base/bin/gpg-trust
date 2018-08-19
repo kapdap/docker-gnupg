@@ -11,7 +11,7 @@ for GPG_SIG in ${GPG_SIGS//+( )/ }; do
     for GPG_KEYSERVER in ${GPG_KEYSERVERS//+( )/ }; do
         echo "Downloading and trusting GPG key for signature $GPG_SIG from key server $GPG_KEYSERVER"
 
-        gpg --keyserver $GPG_KEYSERVER --keyserver-options ${GPG_OPTS:-timeout=10} --recv-keys $GPG_SIG \
+        gpg --keyserver $GPG_KEYSERVER --keyserver-options ${GPG_OPTS:-timeout=10} --recv-keys $GPG_SIG &>/dev/null \
             && echo "trusted-key $GPG_SIG" >> /root/.gnupg/gpg.conf \
             && break 2
 
