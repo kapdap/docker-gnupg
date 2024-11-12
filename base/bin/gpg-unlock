@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ ! -z "$DEBUG" ]; then
+    set -x
+fi
+
+gpgconf --kill keyboxd

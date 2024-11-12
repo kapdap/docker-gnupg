@@ -19,4 +19,4 @@ for GPG_SIG in ${GPG_SIGS//+( )/ }; do
     done
 done
 
-gpgconf --kill all
+gpg-unlock
