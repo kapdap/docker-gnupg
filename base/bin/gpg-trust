@@ -18,3 +18,5 @@ for GPG_SIG in ${GPG_SIGS//+( )/ }; do
         echo "Error: Failed to download GPG key for signature $GPG_SIG from key server $GPG_KEYSERVER"
     done
 done
+
+gpgconf --kill gpg-agent
