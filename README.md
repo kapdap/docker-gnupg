@@ -13,7 +13,10 @@ FROM kapdap/gnupg AS gnupg
 
 ENV GPG_SIGS="0x22D64065B2E9CB17320CF6FAE62F0D0AA3219070"
 
-RUN gpg-trust
+RUN gpg-trust # Download and trust keys in GPG_SIGS
+
+RUN gpg-unlock # Removes gpg database lock.
+               # Run after all other gpg commands. 
 
 ENTRYPOINT ["gpg"]
 
