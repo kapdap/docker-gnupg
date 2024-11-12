@@ -15,5 +15,7 @@ ENV GPG_SIGS="0x22D64065B2E9CB17320CF6FAE62F0D0AA3219070"
 
 RUN gpg-trust
 
-RUN gpg --list-keys
+ENTRYPOINT ["gpg"]
+
+CMD ["--list-keys"]
 ```
